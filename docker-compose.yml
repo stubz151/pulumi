@@ -9,5 +9,5 @@ services:
     db:
         image: "mcr.microsoft.com/mssql/server"
         environment:
-            SA_PASSWORD: "stubbs1234"
+            SA_PASSWORD: "Stubbs1234!"
             ACCEPT_EULA: "Y"

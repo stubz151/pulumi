@@ -138,6 +138,13 @@ namespace HelloWorldFromDB.Controllers
             return messages;
         }
 
+        [HttpGet]
+        [Route("GetHelloWorld")]
+        public async Task<ActionResult<string>> GetHelloWorld()
+        {
+            return "Hello wrorld";
+        }
+
         private bool MessagesExists(string id)
         {
             return _context.Messages.Any(e => e.Author == id);

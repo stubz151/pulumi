@@ -28,7 +28,7 @@ namespace HelloWorldFromDB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = @"Server=db;Database=master;User=sa;Password=Your_password123;";
+            string connectionString = @"Server=db;Database=master;User=sa;Password=Stubbs1234!; Trusted_Connection=False";
             //string connectionString = @"Server = (localdb)\mssqllocaldb; Database=LocalTest; Trusted_Connection=True; ";
 
             if (Configuration.GetConnectionString("HWDatabase") != null)
@@ -74,6 +74,7 @@ namespace HelloWorldFromDB
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Game API");
+                c.RoutePrefix = string.Empty;
             });
         }
     }
@@ -82,7 +83,7 @@ namespace HelloWorldFromDB
     {
         public HelloWorldRepositoryContext CreateDbContext(string[] args)
         {
-            string connectionString = @"Server = (localdb)\mssqllocaldb; Database=LocalHWdb; Trusted_Connection=True; ";
+            string connectionString = @"Server=db;Database=master;User=sa;Password=Stubbs1234!; Trusted_Connection=True";
             if (args.Length != 0)
             {
                 connectionString = args[0];
