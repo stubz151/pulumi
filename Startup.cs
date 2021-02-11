@@ -30,8 +30,10 @@ namespace HelloWorldFromDB
         public void ConfigureServices(IServiceCollection services)
         {
             //string connectionString = @"Server=db;Database=master;User=sa;Password=Stubbs1234!; Trusted_Connection=False";
-            string connectionString = @"Server = (localdb)\mssqllocaldb; Database=LocalTest; Trusted_Connection=True; ";
-
+            string connectionString = $"Server=tcp:sqlunique123.database.windows.net" +
+                $",1433;Initial Catalog=dbm;Persist Security Info=False;User ID=pulumi" +
+                $";Password=ThisIsAPassword!1;MultipleActiveResultSets=False;" +
+                $"Encrypt=True;TrustServerCertificate=False;";
             if (Configuration.GetConnectionString("HWDatabase") != null)
             {
                 connectionString = Configuration.GetConnectionString("HWDatabase");
