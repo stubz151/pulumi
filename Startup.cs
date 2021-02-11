@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,8 @@ namespace HelloWorldFromDB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = @"Server=db;Database=master;User=sa;Password=Stubbs1234!; Trusted_Connection=False";
-            //string connectionString = @"Server = (localdb)\mssqllocaldb; Database=LocalTest; Trusted_Connection=True; ";
+            //string connectionString = @"Server=db;Database=master;User=sa;Password=Stubbs1234!; Trusted_Connection=False";
+            string connectionString = @"Server = (localdb)\mssqllocaldb; Database=LocalTest; Trusted_Connection=True; ";
 
             if (Configuration.GetConnectionString("HWDatabase") != null)
             {
@@ -56,7 +57,7 @@ namespace HelloWorldFromDB
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -65,6 +66,11 @@ namespace HelloWorldFromDB
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
             app.UseSwagger();

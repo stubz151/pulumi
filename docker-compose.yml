@@ -1,13 +1,21 @@
 version: "3.9"
 services:
-    web:
+    api:
         build: .
-        ports:
-            - "8000:80"
+        expose:
+            - "5000"
         depends_on:
             - db
+            - reverseproxy
     db:
         image: "mcr.microsoft.com/mssql/server"
         environment:
             SA_PASSWORD: "Stubbs1234!"
             ACCEPT_EULA: "Y"
+    reverseproxy:
+        build:
+          context: ./Nginx
+          dockerfile: Nginx.Dockerfile
+        ports:
+            - "1024:1024"
+        restart: always
